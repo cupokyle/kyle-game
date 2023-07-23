@@ -7,6 +7,22 @@
   pointer-events: none;
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.input-field {
+  width: 80%;
+  border: none;
+  border-bottom: 2px solid black;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
