@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import logo from './logo.png';
 import './App.css';
+const serverLocale = process.env.REACT_APP_SERVER_LOCALE || 'http://localhost:5001';
 
 const App = () => {
   const [text, setText] = useState('');
@@ -46,9 +47,9 @@ const App = () => {
       });
 
       const systemContent = turnCounter === 1
-      ? 'Now is the time for character creation. please return a JavaScript array of exactly 8 questions that would help you develop a unique character based on the answers. Some questions should be basic and others pivotal questions that would help develop a character. Keep the questions under 12 words in length. Keep the yes-or-no questions to a minimum.'
+      ? 'Now is the time for character creation. Please respond with nothing except for a JavaScript array of exactly 8 questions that would help you develop a unique character based on the answers. Some questions should be basic and others pivotal questions that would help develop my character. Keep the questions under 12 words in length. Ask for things like my character name, physical attributes, background details, etc... For reference, here are the details about the world my character exists in:'
       : turnCounter === 2
-        ? `You are now the game's Dungeon Master. Please think of a fun and original Dungeons & Dragons style campaign that takes place in the world we just created, with the player being the character we jsut created. Please respond as the Dungeon Master beginning the game. Each turn you should format your response in this exact way: a JSON object with two key:value pairs. One key is called "responseString" and contains a string that is a fairly detailed description of the player's environment or situation. The other key is called "choices" which contains an array of 3 actions the player can complete. Each action should be concise, and no more than 12 words.`
+        ? `You are now the game's Dungeon Master. Please think of a fun and original Dungeons & Dragons style campaign that takes place in the world we just created, with the player being the character we just created. Please respond as the Dungeon Master beginning the game. Each turn you should format your response in this exact way: a JSON object with two key:value pairs. One key is called "responseString" and contains a string that is a fairly detailed description of the player's environment or situation. The other key is called "choices" which contains an array of 3 actions the player can complete. Each action should be concise, and no more than 12 words.`
         : '';
       
         messages.unshift({ 'role':'user', 'content': systemContent });
@@ -57,24 +58,28 @@ const App = () => {
     }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_LOCALE}/api/completion`, data);
-      // console.log(response.data);
-      // setResponseData(response.data);
+      const response = await axios.post(`${serverLocale}/api/completion`, data);
+      console.log(response.data);
   
       if (turnCounter < 2) {
-        const responseQuestions = response.data.choices[0].message.content.split('\n');
-        setQuestions(responseQuestions);
-        setFormInputs(Array(8).fill(''));
-       } else if (turnCounter >= 2) {
+        try {
+          const responseQuestions = response.data.choices[0].message.content.split('\n');
+          setQuestions(responseQuestions);
+          setFormInputs(Array(8).fill(''));
+        } catch (error) {
+          console.log('Error parsing world creation response: ', error);
+        }
+      } else if (turnCounter >= 2) {
+        try {
           const responseContent = JSON.parse(response.data.choices[0].message.content);
-        
-          // Remove 'responseString = ' and 'choices = ' from the strings, and remove the quotation marks around the choices
           const cleanedResponseString = responseContent.responseString;
           const choicesArray = responseContent.choices;
-        
           setResponseString(cleanedResponseString);
           setChoices(choicesArray);
+        } catch (error) {
+          console.log('Error parsing game response: ', error);
         }
+      }      
   
       setTurnCounter(turnCounter + 1);
     } catch (error) {
@@ -94,7 +99,7 @@ const App = () => {
     };
     
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_LOCALE}/api/completion`, data);
+      const response = await axios.post(`${serverLocale}/api/completion`, data);
       // console.log(response.data);
       // setResponseData(response.data);
     

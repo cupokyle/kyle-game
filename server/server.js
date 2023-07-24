@@ -12,7 +12,7 @@ app.post('/api/completion', async (req, res) => {
   const data = {
     'model': 'gpt-3.5-turbo',
     'messages': req.body.messages,
-    'temperature': 0.7,
+    'temperature': 1.1,
   };
 
   try {
