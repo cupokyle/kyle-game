@@ -1,54 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+  margin: 0;
+  padding: 0;
+  font-size: 18px; /* Add this line */
+}
+
 .App {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-field, button {
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 18px; /* Adjust this to your liking */
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 18px; /* Adjust this to your liking */
+  background-color: #0275d8;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logo {
+  max-width: 100px;
+  margin: auto;
+  display: block;
+}
+
+button:hover {
+  background-color: #025aa5;
+}
+
+button:active {
+  background-color: #014c8c;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1em;
 }
 
-.input-field {
-  width: 80%;
-  border: none;
-  border-bottom: 2px solid black;
-  text-align: center;
-  margin: auto;
-  display: block;
+.form-group label {
+  margin-bottom: 5px;
 }
 
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p {
+  margin: 10px 0;
+  line-height: 1.6;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.choice-button {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  width: 200px;
+  margin: 10px auto; /* Adjusted this line to add vertical space */
+  padding: 10px;
+  font-size: 18px; /* Adjust this to your liking */
+  background-color: #0275d8;
   color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.choice-button:hover {
+  background-color: #025aa5;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.choice-button:active {
+  background-color: #014c8c;
 }
+
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}
+
