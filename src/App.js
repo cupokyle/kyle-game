@@ -21,8 +21,6 @@ const App = () => {
     '#2B0404', '#3E0606', '#551111', '#8A2929', '#AD4646'  // Variations of dark red
   ];
 
-  const REACT_APP_SERVER_LOCALE = process.env.REACT_APP_SERVER || 'http://localhost:5001/api/completion';
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);  // set loading to true
