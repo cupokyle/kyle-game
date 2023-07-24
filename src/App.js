@@ -59,7 +59,7 @@ const App = () => {
     }
 
     try {
-      const response = await axios.post(REACT_APP_SERVER_LOCALE, data);
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_LOCALE}/api/completion`, data);
       // console.log(response.data);
       // setResponseData(response.data);
   
@@ -96,7 +96,7 @@ const App = () => {
     };
     
     try {
-      const response = await axios.post(REACT_APP_SERVER_LOCALE, data);
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_LOCALE}/api/completion`, data);
       // console.log(response.data);
       // setResponseData(response.data);
     
