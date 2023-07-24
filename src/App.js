@@ -21,6 +21,8 @@ const App = () => {
     '#2B0404', '#3E0606', '#551111', '#8A2929', '#AD4646'  // Variations of dark red
   ];
 
+  const REACT_APP_SERVER_LOCALE = process.env.REACT_APP_SERVER || 'http://localhost:5001/api/completion';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);  // set loading to true
@@ -57,7 +59,7 @@ const App = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5001/api/completion', data);
+      const response = await axios.post(REACT_APP_SERVER_LOCALE, data);
       // console.log(response.data);
       // setResponseData(response.data);
   
@@ -94,7 +96,7 @@ const App = () => {
     };
     
     try {
-      const response = await axios.post('http://localhost:5001/api/completion', data);
+      const response = await axios.post(REACT_APP_SERVER_LOCALE, data);
       // console.log(response.data);
       // setResponseData(response.data);
     
