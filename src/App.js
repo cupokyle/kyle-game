@@ -5,7 +5,7 @@ import './App.css';
 
 const App = () => {
   const [text, setText] = useState('');
-  const [responseData, setResponseData] = useState(null);
+  // const [responseData, setResponseData] = useState(null);
   const [turnCounter, setTurnCounter] = useState(0);
   const [formInputs, setFormInputs] = useState(Array(8).fill(''));  // To manage 8 input fields
   const [questions, setQuestions] = useState([]);  // To store the questions returned from the API
@@ -58,8 +58,8 @@ const App = () => {
 
     try {
       const response = await axios.post('http://localhost:5001/api/completion', data);
-      console.log(response.data);
-      setResponseData(response.data);
+      // console.log(response.data);
+      // setResponseData(response.data);
   
       if (turnCounter < 2) {
         const responseQuestions = response.data.choices[0].message.content.split('\n');
@@ -95,8 +95,8 @@ const App = () => {
     
     try {
       const response = await axios.post('http://localhost:5001/api/completion', data);
-      console.log(response.data);
-      setResponseData(response.data);
+      // console.log(response.data);
+      // setResponseData(response.data);
     
       const responseContent = JSON.parse(response.data.choices[0].message.content);
     
